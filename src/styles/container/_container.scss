@@ -1,6 +1,6 @@
 @use "../mixins/variables" as var;
 
-.container {
+div.container {
     width: 98%;
     height: auto;
     margin: auto;
@@ -10,4 +10,7 @@
    // background-color: #000;
     
     @import "panel";
+    @import "classes";
+    @import "description/main";
+    @import "item-to-test/main";
 }
