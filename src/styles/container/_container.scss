@@ -1,0 +1,13 @@
+@use "../mixins/variables" as var;
+
+.container {
+    width: 98%;
+    height: auto;
+    margin: auto;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    max-width: var.$max-width;
+   // background-color: #000;
+    
+    @import "panel";
+}

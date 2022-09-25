@@ -10,7 +10,6 @@
     max-width: var.$max-width;
     height: 60px;
     cursor: pointer;
-    
     padding: 0;
     margin: 0;
     display: flex;
@@ -27,6 +26,11 @@
             line-height: 20px;
             text-align: center;
             color: var.$text-color;
+            margin: auto;
         }
     }
+}
+
+#top-nav + * {
+    margin-top: 70px !important;
 }
