@@ -1,0 +1,28 @@
+@use "../../mixins/variables" as var;
+
+.item-to-test {
+    width: 90%;
+    margin: auto;
+    position: relative;
+    
+    > label {
+        border-bottom: 1px solid;
+        font-size: 1.2rem;
+    }
+    
+    > ul {
+        list-style: none;
+        padding: 0;
+        margin: 0.5em 0em 0.5em 0.7em;
+        > li {
+            padding: 0;
+            margin-bottom: 0.3rem;
+            font-family: "Montserrat", "Sans-Serif";
+            font-weight: 400;
+            &:before {
+                content: "\2015\2000";
+            }
+            color: var.$text-color;
+        }
+    }
+}

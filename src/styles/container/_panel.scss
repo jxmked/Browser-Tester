@@ -1,6 +1,6 @@
 @use "../mixins/variables" as var;
 
-> .panel {
+> div.panel {
     padding: 7px 8px 6px 12px;
     
     @import "row";

@@ -1,0 +1,18 @@
+@use "../../mixins/variables" as var;
+
+@import "panel";
+
+div.description-row {
+    
+    > label {
+        font-size: 1.2rem;
+    }
+    
+    > article {
+        margin-top: 1rem;
+        font-size: 1rem;
+        text-indent: 1rem;
+        color: var.$text-color;
+    }
+    padding: 10px;
+}
