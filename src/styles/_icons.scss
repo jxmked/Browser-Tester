@@ -14,8 +14,9 @@ ul {
     
     .icons {
         &:before {
-          //  width: 1rem;
             position: relative;
+            margin-right: 0.6rem;
         }
     }
 }
+

@@ -10,7 +10,7 @@
         font-size: 1.2rem;
     }
     
-    > ul {
+    ul {
         list-style: none;
         padding: 0;
         margin: 0.5em 0em 0.5em 0.7em;
@@ -24,6 +24,10 @@
             }
             color: var.$text-color;
             font-size: 1.1rem;
+            
+            > label {
+                font-weight: 600;
+            }
         }
     }
 }
