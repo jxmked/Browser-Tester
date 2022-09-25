@@ -1,0 +1,30 @@
+{
+  "name": "browser-tester",
+  "version": "1.0.0",
+  "description": "Test Basic Browser Capabilities",
+  "main": "dist/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p tsconfig-build.json && sass -s compressed --no-sourcemap 'src/style/main.scss:dist/main.css'",
+    "dev": "concurrently 'tsc --watch -p tsconfig.json' 'sass --watch -s compressed --embed-sources \"src/style/main.scss:dist/main.css\"'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jxmked/Browser-Tester.git"
+  },
+  "keywords": [
+    "browser-tester"
+  ],
+  "author": "jxmked <jamc015lol@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jxmked/Browser-Tester/issues"
+  },
+  "homepage": "https://github.com/jxmked/Browser-Tester#readme",
+  "devDependencies": {
+    "concurrently": "^7.4.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.2",
+    "sass": "^1.54.9"
+  }
+}
