@@ -43,20 +43,25 @@ define(["require", "exports"], function (require, exports) {
             var li = document.createElement("li");
             var sp = document.createElement("span");
             var classNames = __spreadArray([], this.classNames, true);
-            if (this.is_boolean(name)) {
+            sp.appendChild(document.createTextNode(name));
+            if (this.is_boolean(value)) {
                 classNames.push(name == String(name) ? Level_2_Item.if_true : Level_2_Item.if_false);
+                sp.setAttribute("class", classNames.join(" "));
             }
             else {
-                classNames.push(name);
+                var lp = document.createElement("span");
+                lp.appendChild(document.createTextNode(value));
+                sp.appendChild(document.createTextNode(" - "));
+                sp.appendChild(lp);
+                lp.setAttribute("style", "color: rgb(48, 209, 88);");
             }
-            sp.appendChild(document.createTextNode(name));
-            sp.setAttribute("class", classNames.join(" "));
             li.setAttribute("class", "lvl-1");
             li.appendChild(sp);
             return li;
         };
-        Level_2_Item.prototype.is_boolean = function (param) {
-            return (param == true || param == false);
+        Level_2_Item.prototype.is_boolean = function (val) {
+            var param = String(val);
+            return (param == "true" || param == "false");
         };
         Level_2_Item.if_true = "icon-checkmark";
         Level_2_Item.if_false = "icon-cross";
@@ -64,4 +69,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = Level_2_Item;
 });
-//# sourceMappingURL=Level_2_Item_Boolean.js.map
+//# sourceMappingURL=Level_2_Item.js.map
