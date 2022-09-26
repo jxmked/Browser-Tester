@@ -19,6 +19,7 @@ define(["require", "exports"], function (require, exports) {
         Object.defineProperty(Level_2_Item.prototype, "element", {
             get: function () {
                 var li = document.createElement("li");
+                li.setAttribute("class", "lvl-2");
                 li.appendChild(this.createLabel());
                 li.appendChild(this.createSubList());
                 return li;
