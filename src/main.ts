@@ -2,21 +2,12 @@ import Level_1_Item_Boolean from "./Level_1_Item_Boolean";
 import Level_2_Item from "./Level_2_Item";
 
 type Level_1_Type = [string, boolean|{[key:string]:boolean|string}];
-type Level_2_Type = [string, boolean|string];
-type Level_3_Type = [string, boolean|string|Level_2_Type];
-
-// Level 1 Item . Element
-type L1IType = HTMLLIElement;
 
 class Main {
-    
-    items:L1IType[];
     private dom_ul:HTMLElement;
     private test_label_status:HTMLElement;
     
     constructor(mdnzr:ModernizrStatic){
-        this.items = [];
-        
         this.dom_ul = document.getElementById("items")!;
         this.test_label_status = document.getElementById("test-label-status")!;
         

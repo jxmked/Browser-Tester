@@ -5,10 +5,12 @@
 
 ## Commands
 
-- Start Development Mode 
+- Start Development Mode
+  - `npm install`
   - `npm run dev`
-  - ~~`tsc --watch`~~
-  - ~~`sass -t compressed --watch -C --sourcemap=file "src/style/main.scss:dist/main.css"`~~
+
+- Build
+  - `npm run build`
 
 ## Socials
 
