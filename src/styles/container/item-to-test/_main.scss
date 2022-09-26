@@ -1,7 +1,7 @@
 @use "../../mixins/variables" as var;
 
 .item-to-test {
-    width: 90%;
+    width: 98%;
     margin: auto;
     position: relative;
     
@@ -10,10 +10,11 @@
         font-size: 1.2rem;
     }
     
-    > ul {
+    ul {
         list-style: none;
         padding: 0;
-        margin: 0.5em 0em 0.5em 0.7em;
+        margin: 0.5em 0em 0.5em 0.5em;
+        
         > li {
             padding: 0;
             margin-bottom: 0.3rem;
@@ -23,6 +24,11 @@
                 content: "\2015\2000";
             }
             color: var.$text-color;
+            font-size: 1.1rem;
+            
+            > label {
+                font-weight: 600;
+            }
         }
     }
 }

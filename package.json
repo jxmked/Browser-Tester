@@ -22,8 +22,9 @@
   },
   "homepage": "https://github.com/jxmked/Browser-Tester#readme",
   "devDependencies": {
+    "@types/modernizr": "^3.5.3",
     "concurrently": "^7.4.0",
-    "typescript": "^4.8.2",
-    "sass": "^1.54.9"
+    "sass": "^1.54.9",
+    "typescript": "^4.8.2"
   }
 }

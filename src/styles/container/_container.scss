@@ -7,8 +7,7 @@ div.container {
     padding: 5px 10px;
     box-sizing: border-box;
     max-width: var.$max-width;
-   // background-color: #000;
-    
+   
     @import "panel";
     @import "classes";
     @import "description/main";
