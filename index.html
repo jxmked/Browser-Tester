@@ -13,6 +13,17 @@
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-JPJZGW7PW6"></script>
         <script type="text/javascript">
+            
+            function onClickEvent(element) {
+                var url = element.getAttribute("href");
+                
+                element.addEventListener("click", function(){
+                    gtag("event", "url_clicked", {
+                        "social_name": url 
+                    });
+                });
+            }
+            
             (function(id){
                 window.dataLayer = window.dataLayer || [];
                 window.gtag = window.gtag || function() {
@@ -22,6 +33,10 @@
                 if(window.location.protocol.toString() == "https:") {
                     gtag('js', new Date());
                     gtag('config', id);
+                    
+                    document.querySelectorAll(".listen-on-click").forEach(function(element) {
+                        onClickEvent(element);
+                    });
                 }
             })("G-JPJZGW7PW6");
         </script>
@@ -67,9 +82,27 @@
                 <div class="row description-row">
                     <label class="header-color header-label header-bold">About result</label>
                     <article>
-                        This result are based on <a href="https://modernizr.com/" target="__blank">Modernizr</a> testing kit.
+                        This result are based on <a class="listen-on-click" href="https://modernizr.com/" target="_blank">Modernizr</a> testing kit.
                     </article>
                 </div>
+            </div>
+            
+        </div>
+        
+        <div class="footer">
+            <div>
+                <span>
+                    <a href="https://github.com/jxmked" target="_blank" class="listen-on-click icons icon-github"></a>
+                </span>
+                <span>
+                    <a href="https://www.instagram.com/jxmked/" target="_blank" class="listen-on-click icons icon-instagram"></a>
+                </span>
+                <span>
+                    <a href="https://www.facebook.com/deguia25" target="_blank" class="listen-on-click icons icon-facebook"></a>
+                </span>
+                <span>
+                    <a href="https://twitter.com/jxmked" target="_blank" class="listen-on-click icons icon-twitter"></a>
+                </span>
             </div>
         </div>
     </body>

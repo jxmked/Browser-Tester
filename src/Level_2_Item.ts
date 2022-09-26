@@ -31,6 +31,8 @@ export default class Level_2_Item {
     get element():HTMLLIElement {
         const li:HTMLLIElement = document.createElement("li");
         
+        li.setAttribute("class", "lvl-2");
+        
         // Add Label
         li.appendChild(this.createLabel());
         
