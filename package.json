@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -p tsconfig-build.json && sass -s compressed --no-sourcemap 'src/styles/main.scss:dist/main.css'",
-    "dev": "concurrently 'tsc --watch -p tsconfig.json' 'sass --watch -s compressed --embed-sources \"src/styles/main.scss:dist/main.css\"'"
+    "dev": "concurrently --raw 'tsc --watch -p tsconfig.json' 'sass --watch -s compressed --embed-sources \"src/styles/main.scss:dist/main.css\"'"
   },
   "repository": {
     "type": "git",

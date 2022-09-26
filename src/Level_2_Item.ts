@@ -74,7 +74,7 @@ export default class Level_2_Item {
             sp.setAttribute("class", classNames.join(" "));
         } else {
             const lp:HTMLSpanElement = document.createElement("span");
-            lp.appendChild(document.createTextNode(value));
+            lp.appendChild(document.createTextNode(String(value)));
             
             sp.appendChild(document.createTextNode(` - `));
             sp.appendChild(lp);

@@ -51,7 +51,7 @@ define(["require", "exports"], function (require, exports) {
             }
             else {
                 var lp = document.createElement("span");
-                lp.appendChild(document.createTextNode(value));
+                lp.appendChild(document.createTextNode(String(value)));
                 sp.appendChild(document.createTextNode(" - "));
                 sp.appendChild(lp);
                 lp.setAttribute("style", "color: rgb(48, 209, 88);");
