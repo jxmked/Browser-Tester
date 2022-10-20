@@ -1,12 +1,4 @@
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -43,134 +35,62 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+function define() {
+}
+var LIST_ITEM = document.getElementById("items");
+var TEXT_LABEL = document.getElementById("test-label-status");
+var FRAGMENTS = document.createDocumentFragment();
+var ACRY = document.getElementById("lib");
+var BOOLEAN_RESULT = {
+    "true": "icon-checkmark",
+    "false": "icon-cross"
 };
-define("Level_1_Item_Boolean", ["require", "exports"], function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var Level_1_Item_Boolean = (function () {
-        function Level_1_Item_Boolean(name, value) {
-            this.name = name;
-            this.value = value;
-            this.classNames = ["item", "icons"];
-            if (this.value) {
-                this.classNames.push(Level_1_Item_Boolean.if_true);
+var create_item = function (name, value) {
+    var li = document.createElement("li");
+    var content = document.createElement("span");
+    li.classList.add("lvl-1");
+    content.appendChild(document.createTextNode(name));
+    li.appendChild(content);
+    if (typeof value == "boolean") {
+        content.classList.add("item");
+        content.classList.add("icons");
+        content.classList.add(BOOLEAN_RESULT[String(value)]);
+    }
+    else {
+        var childSpan = document.createElement("span");
+        childSpan.appendChild(document.createTextNode(String(value)));
+        childSpan.style.color = "#30d158";
+        content.appendChild(document.createTextNode("-"));
+        content.appendChild(childSpan);
+    }
+    return li;
+};
+var main = function (name, items, depth) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        Object.entries(items).forEach(function (_a) {
+            var title = _a[0], attr = _a[1];
+            if (typeof attr == "boolean") {
+                var item = create_item(title, attr);
+                LIST_ITEM.appendChild(item);
             }
-            else {
-                this.classNames.push(Level_1_Item_Boolean.if_false);
-            }
-        }
-        Object.defineProperty(Level_1_Item_Boolean.prototype, "element", {
-            get: function () {
-                var li = document.createElement("li");
-                var span = document.createElement("span");
-                li.setAttribute("class", "lvl-1");
-                span.appendChild(document.createTextNode(this.name));
-                span.setAttribute("class", this.classNames.join(" "));
-                li.appendChild(span);
-                return li;
-            },
-            enumerable: false,
-            configurable: true
         });
-        Level_1_Item_Boolean.if_true = "icon-checkmark";
-        Level_1_Item_Boolean.if_false = "icon-cross";
-        return Level_1_Item_Boolean;
-    }());
-    exports.default = Level_1_Item_Boolean;
-});
-define("Level_2_Item", ["require", "exports"], function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var Level_2_Item = (function () {
-        function Level_2_Item(name, value) {
-            this.classNames = ["item", "icons"];
-            this.value = value;
-            this.name = name;
+        return [2];
+    });
+}); };
+document.addEventListener("DOMContentLoaded", function () { return __awaiter(void 0, void 0, void 0, function () {
+    var res;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4, Modernizr];
+            case 1:
+                res = _a.sent();
+                main("Tested Items", res, 1);
+                Modernizr.on("cors", function (res) {
+                    console.log(res);
+                });
+                ACRY.innerText += "@" + Modernizr._version;
+                return [2];
         }
-        Object.defineProperty(Level_2_Item.prototype, "element", {
-            get: function () {
-                var li = document.createElement("li");
-                li.setAttribute("class", "lvl-2");
-                li.appendChild(this.createLabel());
-                li.appendChild(this.createSubList());
-                return li;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Level_2_Item.prototype.createLabel = function () {
-            var lb = document.createElement("label");
-            lb.appendChild(document.createTextNode(this.name));
-            return lb;
-        };
-        Level_2_Item.prototype.createSubList = function () {
-            var _this = this;
-            var ul = document.createElement("ul");
-            Object.entries(this.value).forEach(function (value) {
-                ul.appendChild(_this.createListSpan.apply(_this, value));
-            });
-            return ul;
-        };
-        Level_2_Item.prototype.createListSpan = function (name, value) {
-            var li = document.createElement("li");
-            var sp = document.createElement("span");
-            var classNames = __spreadArray([], this.classNames, true);
-            sp.appendChild(document.createTextNode(name));
-            if (this.is_boolean(value)) {
-                classNames.push(name == String(name) ? Level_2_Item.if_true : Level_2_Item.if_false);
-                sp.setAttribute("class", classNames.join(" "));
-            }
-            else {
-                var lp = document.createElement("span");
-                lp.appendChild(document.createTextNode(String(value)));
-                sp.appendChild(document.createTextNode(" - "));
-                sp.appendChild(lp);
-                lp.setAttribute("style", "color: rgb(48, 209, 88);");
-            }
-            li.setAttribute("class", "lvl-1");
-            li.appendChild(sp);
-            return li;
-        };
-        Level_2_Item.prototype.is_boolean = function (val) {
-            var param = String(val);
-            return (param == "true" || param == "false");
-        };
-        Level_2_Item.if_true = "icon-checkmark";
-        Level_2_Item.if_false = "icon-cross";
-        return Level_2_Item;
-    }());
-    exports.default = Level_2_Item;
-});
-define("main", ["require", "exports", "Level_1_Item_Boolean", "Level_2_Item"], function (require, exports, Level_1_Item_Boolean_1, Level_2_Item_1) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    Level_1_Item_Boolean_1 = __importDefault(Level_1_Item_Boolean_1);
-    Level_2_Item_1 = __importDefault(Level_2_Item_1);
-    var Main = (function () {
-        function Main(mdnzr) {
-            this.dom_ul = document.getElementById("items");
-            this.test_label_status = document.getElementById("test-label-status");
-            var fragments = document.createDocumentFragment();
-            Object.entries(mdnzr).forEach(function (entries) {
-                var name = entries[0], value = entries[1];
-                if (value instanceof Object) {
-                    fragments.appendChild(new Level_2_Item_1.default(name, value).element);
-                }
-                else {
-                    fragments.appendChild(new Level_1_Item_Boolean_1.default(name, value).element);
-                }
-            });
-            this.dom_ul.appendChild(fragments);
-            this.test_label_status.innerText = "Test Result";
-        }
-        return Main;
-    }());
-    (function () { return __awaiter(void 0, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            new Main(Modernizr);
-            return [2];
-        });
-    }); })();
-});
+    });
+}); });
+//# sourceMappingURL=main.js.map
