@@ -1,11 +1,11 @@
-
-function define(){
-    
-}
+/**
+ * Browser-Tester are based on Modernizr testing kit
+ * 
+ * Github: https://github.com/jxmked/Browser-Tester/
+ */
 
 const LIST_ITEM:HTMLElement = document.getElementById("items")!;
 const TEXT_LABEL:HTMLElement = document.getElementById("test-label-status")!;
-const FRAGMENTS:DocumentFragment = document.createDocumentFragment();
 const ACRY:HTMLElement = document.getElementById("lib")!;
 
 /**
@@ -16,62 +16,88 @@ const BOOLEAN_RESULT:{[key:string]:string} = {
     "false": "icon-cross"
 };
 
-
 const create_item:Function = (name:string, value:number|string|boolean):HTMLElement => {
     const li:HTMLElement = document.createElement("li");
     const content:HTMLElement = document.createElement("span");
     
-    li.classList.add("lvl-1")
+    content.appendChild(document.createTextNode(name));
     
-    content.appendChild(document.createTextNode(name))
     li.appendChild(content);
     
-    // Is boolean?
     if(typeof value == "boolean") {
+        
         content.classList.add("item");
         content.classList.add("icons");
         content.classList.add(BOOLEAN_RESULT[String(value)]);
+    
     } else {
+    
         const childSpan:HTMLElement = document.createElement("span");
-        childSpan.appendChild(document.createTextNode(String(value)));
-        
+
         childSpan.style.color = "#30d158";
-        
-        content.appendChild(document.createTextNode("-"));
+
+        childSpan.appendChild(document.createTextNode(String(value)));
+        content.appendChild(document.createTextNode(" - "));
         content.appendChild(childSpan);
     }
     
     return li;
 }
 
+const main:Function = (name:string, items:object, depth:number):DocumentFragment => {
+    const label:HTMLElement = document.createElement("label");
+    const ul:HTMLElement = document.createElement("ul");
+    const frag:DocumentFragment = document.createDocumentFragment();
 
-const main:Function = async (name:string, items:object, depth:number):Promise<void> => {
-    // Create Label
-    //const label:HTMLElement = document.createElement("label");
+    if(depth == 1) {
+        label.classList.add("header-color");
+        label.classList.add("header-label");
+        label.classList.add("header-bold");    
+    }
+
+    label.appendChild(document.createTextNode(String(name)));
+    
     Object.entries(items).forEach(([title, attr]) => {
-        if(typeof attr == "boolean") {
-            const item = create_item(title, attr);
-            
-            LIST_ITEM.appendChild(item);
+        if(attr instanceof Object) {
+            // Reconstruct 
+            const sub = main(title, attr, depth + 1);
+            const li = document.createElement("li");
+
+            li.appendChild(sub);
+            ul.appendChild(li);
+        
+        } else {
+            ul.append(create_item(title, attr));
         }
     });
+    
+    frag.append(label);
+    frag.append(ul);
+
+    return frag;
 }
 
-
-
-
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", async () => {
-    const res = await Modernizr;
-   // console.log(res)
-    main("Tested Items", res, 1);
+document.addEventListener("DOMContentLoaded", () => {
+    /**
+     * Giving time to loadup
+     */
+    const res = Modernizr; 
     
-    Modernizr.on("cors", (res) => {
-        console.log(res)
-    })
+    window.setTimeout(() => {
+        
+        // Clear
+        while(LIST_ITEM.firstChild) {
+            LIST_ITEM.removeChild(LIST_ITEM.firstChild)
+        }
+
+        LIST_ITEM.appendChild(main("Tested Items", res, 1));
+    }, 3000);
+        
+    // @ts-ignore
     ACRY.innerText += "@" + Modernizr._version;
 });
+
+/**
+ * Written by Jovan De Guia
+ */
+
