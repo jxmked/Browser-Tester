@@ -1,38 +1,103 @@
-import Level_1_Item_Boolean from "./Level_1_Item_Boolean";
-import Level_2_Item from "./Level_2_Item";
+/**
+ * Browser-Tester are based on Modernizr testing kit
+ * 
+ * Github: https://github.com/jxmked/Browser-Tester/
+ */
 
-type Level_1_Type = [string, boolean|{[key:string]:boolean|string}];
+const LIST_ITEM:HTMLElement = document.getElementById("items")!;
+const TEXT_LABEL:HTMLElement = document.getElementById("test-label-status")!;
+const ACRY:HTMLElement = document.getElementById("lib")!;
 
-class Main {
-    private dom_ul:HTMLElement;
-    private test_label_status:HTMLElement;
+/**
+ * Css Icons for status result
+ * */
+const BOOLEAN_RESULT:{[key:string]:string} = {
+    "true": "icon-checkmark",
+    "false": "icon-cross"
+};
+
+const create_item:Function = (name:string, value:number|string|boolean):HTMLElement => {
+    const li:HTMLElement = document.createElement("li");
+    const content:HTMLElement = document.createElement("span");
     
-    constructor(mdnzr:ModernizrStatic){
-        this.dom_ul = document.getElementById("items")!;
-        this.test_label_status = document.getElementById("test-label-status")!;
+    content.appendChild(document.createTextNode(name));
+    
+    li.appendChild(content);
+    
+    if(typeof value == "boolean") {
         
-        const fragments:DocumentFragment = document.createDocumentFragment();
-        
-        Object.entries(mdnzr).forEach((entries:Level_1_Type) => {
-            const [name, value] = entries;
-            
-            if(value instanceof Object) {
-                // Object
-                fragments.appendChild(new Level_2_Item(name, value).element);
-            } else {
-                // Boolean
-                fragments.appendChild(new Level_1_Item_Boolean(name, value).element);
-            }  
-        });
-        
-        this.dom_ul.appendChild(fragments);
-        
-        this.test_label_status.innerText = "Test Result";
+        content.classList.add("item");
+        content.classList.add("icons");
+        content.classList.add(BOOLEAN_RESULT[String(value)]);
+    
+    } else {
+    
+        const childSpan:HTMLElement = document.createElement("span");
+
+        childSpan.style.color = "#30d158";
+
+        childSpan.appendChild(document.createTextNode(String(value)));
+        content.appendChild(document.createTextNode(" - "));
+        content.appendChild(childSpan);
     }
+    
+    return li;
 }
 
+const main:Function = (name:string, items:object, depth:number):DocumentFragment => {
+    const label:HTMLElement = document.createElement("label");
+    const ul:HTMLElement = document.createElement("ul");
+    const frag:DocumentFragment = document.createDocumentFragment();
 
-(async () => {
-    new Main(Modernizr);
-})();
+    if(depth == 1) {
+        label.classList.add("header-color");
+        label.classList.add("header-label");
+        label.classList.add("header-bold");    
+    }
+
+    label.appendChild(document.createTextNode(String(name)));
+    
+    Object.entries(items).forEach(([title, attr]) => {
+        if(attr instanceof Object) {
+            // Reconstruct 
+            const sub = main(title, attr, depth + 1);
+            const li = document.createElement("li");
+
+            li.appendChild(sub);
+            ul.appendChild(li);
+        
+        } else {
+            ul.append(create_item(title, attr));
+        }
+    });
+    
+    frag.append(label);
+    frag.append(ul);
+
+    return frag;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    /**
+     * Giving time to loadup
+     */
+    const res = Modernizr; 
+    
+    window.setTimeout(() => {
+        
+        // Clear
+        while(LIST_ITEM.firstChild) {
+            LIST_ITEM.removeChild(LIST_ITEM.firstChild)
+        }
+
+        LIST_ITEM.appendChild(main("Tested Items", res, 1));
+    }, 3000);
+        
+    // @ts-ignore
+    ACRY.innerText += "@" + Modernizr._version;
+});
+
+/**
+ * Written by Jovan De Guia
+ */
 

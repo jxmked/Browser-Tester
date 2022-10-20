@@ -12,37 +12,51 @@
         <meta name="referrer" content="origin">
         
         <script type="application/javascript">
+            window.define = window.define || function(){
+                const args = arguments;
+                
+                if(args[0] == "test/network/beacon") {
+                    window.Modernizr = args[1];
+                }
+            };
+        
+            window.XIO = window.XIO || {};
+            window.XIO.ENVIRONMENT_MODE = window.XIO.ENVIRONMENT_MODE || "dev";
+            
             function onClickEvent(element) {
                 var url = element.getAttribute("href");
-                
-                element.addEventListener("click", function(){
+    
+                element.addEventListener("click", function() {
                     gtag("event", "url_clicked", {
-                        "social_name": url 
+                        "social_name": url
                     });
                 });
             }
-
-            // Google tag (gtag.js)    
-            (function(id){
-                if(window.location.protocol.toString() != "https:")
+    
+            // Google tag (gtag.js)
+            (function(id) {
+                if (window.location.protocol.toString() != "https:")
                     return;
-
+                
+                window.XIO = window.XIO || {};
+                window.XIO.ENVIRONMENT_MODE = "prod";
+                
                 var scr = document.createElement("script");
                 scr.setAttribute("src", "https://www.googletagmanager.com/gtag/js?id=" + id);
                 scr.async = true;
                 scr.setAttribute("type", "application/javascript");
-
+    
                 document.getElementsByTagName('head')[0].appendChild(scr);
-
+    
                 window.dataLayer = window.dataLayer || [];
                 window.gtag = window.gtag || function() {
                     dataLayer.push(arguments);
                 };
-
+    
                 gtag('js', new Date());
                 gtag('config', id);
-                document.addEventListener("DOMContentLoaded", function(){
-                    Array.prototype.forEach.call(document.getElementsByClassName("listen-on-click"), function(element){
+                document.addEventListener("DOMContentLoaded", function() {
+                    Array.prototype.forEach.call(document.getElementsByClassName("listen-on-click"), function(element) {
                         onClickEvent(element);
                     });
                 });
@@ -60,7 +74,6 @@
         <link rel="stylesheet" href="assets/icons/icon-v1.css">
         <link rel="stylesheet" href="dist/main.css">
         
-        <script src="assets/lib/require.js" data-main="dist/main" type="application/javascript" charset="utf-8"></script>
         <script src="assets/lib/modernizr-custom.js" type="application/javascript" charset="utf-8"></script>
     </head>
     <body>
@@ -74,17 +87,14 @@
             <div class="panel">
                 <div class="row description-row">
                     <label class="header-color header-label header-bold">Why to test?</label>
-                    <article>
-                        Ahmmm... Actually, I developed this for my project.
-                    </article>
+                    <p>Checking every posibilities of a browser you are currently working on</p>
                 </div>
             </div>
             
             <div class="panel item-to-test">
                 <div class="row">
-                    <div class="item-to-test">
-                        <label id="test-label-status" class="header-color header-label header-bold">Testing...</label>
-                        <ul id="items"></ul>
+                    <div class="item-to-test" id="items">
+                       <label style="text-align: center;" class="header-color header-label header-bold">Please wait...</label>
                     </div>
                 </div>
             </div>
@@ -92,9 +102,7 @@
             <div class="panel">
                 <div class="row description-row">
                     <label class="header-color header-label header-bold">About result</label>
-                    <article>
-                        This result are based on <a class="header-bold listen-on-click" href="https://modernizr.com/" target="_blank">Modernizr</a> testing kit.
-                    </article>
+                    <p>This result are based on <a id="lib" class="header-bold listen-on-click" href="https://modernizr.com/" target="_blank">Modernizr</a> testing kit.</p>
                 </div>
             </div>
             
@@ -116,5 +124,6 @@
                 </span>
             </div>
         </div>
+        <script src="dist/main.js" type="application/javascript" charset="utf-8"></script>
     </body>
 </html>
