@@ -1,3 +1,5 @@
+<script >
+</script>
 <template>
   <div class="item">
     <icon>

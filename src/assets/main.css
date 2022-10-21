@@ -1,1 +1,16 @@
 @import './base.css';
+
+
+ul span.item{
+  display:inline
+}
+ul .icon-checkmark:before{
+  color:#30d158
+}
+ul .icon-cross:before{
+  color:#ff453a
+}
+ul .icons:before{
+  position:relative;
+  margin-right:.6rem
+}
