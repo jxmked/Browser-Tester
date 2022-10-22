@@ -7,6 +7,11 @@ import "./assets/fonts/caviar-dreams/stylesheet.css";
 import "./assets/fonts/montserrat/stylesheet.css";
 import "./assets/icons/icon-v1.css";
 
+
+import Checks from "./Checks"; 
+
+Checks();
+
 const app = createApp(App);
 
 app.use(createPinia());
