@@ -1,39 +1,22 @@
 <script setup lang="ts">
+    defineProps<{
+        title:string,
+        items:object|string
+    }>();
+</script>
+
+<script setup lang="ts">
     import Item from "./Item.vue";
+    import Self from "./TestList.vue";
 </script>
 <template>
-    <div class="container">
-        <div class="panel">
-            <label>Results</label>
-            <ul>
-                <Item title="hotdog" value="false" />
-                <Item title="hakdog" value="true" />
-                <li>
-                    <label>Results</label>
-                    <ul>
-                        <li>
-                            <span class="item icons">
-                                <Cross />
-                            </span>
-                            <p>Testing Kit</p>
-                        </li>
-                        <li>
-                            <span class="item icons">
-                                <Check />
-                            </span>
-                            <p>Testing Kit</p>
-                        </li>
-                        <li>
-                            <p>method - <span>Run</span></p>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <p>method - <span>Run</span></p>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <label>{{title}}</label>
+    <ul v-for="[key, value] in Object.entries(items)">
+        <Item v-if="['string', 'boolean'].indexOf((typeof value)) != -1" title="{{key}}" value="{{value}}" />
+        <li v-else>
+            <Self title="{{key}}" items="{{value}}" />
+        </li>
+    </ul>
 </template>
 
 <style scoped>

@@ -7,5 +7,8 @@
 <template>
   <Navigation title="Quick Browser Tester" />
   <Description />
-  <TestList />
+  <div class="container">
+    <as>sadasd</as>
+    <TestList title="Fuck" items="{{Modernizr}}"/>
+  </div>
 </template>

@@ -10,6 +10,7 @@
 </script>
 
 <template>
+    <!-- If our value is a boolean -->
     <li v-if="value == 'true' || value == 'false'">
         <span class="item icons">
         
@@ -19,6 +20,8 @@
         </span>
         <p>{{title}}</p>
     </li>
+
+    <!-- If our value is a string -->
     <li v-else>
         <p>{{title}} - <span class="response-result">{{value}}</span></p>
     </li>
