@@ -1,27 +1,13 @@
 <script setup lang="ts">
-    import Cross from "./icons/cross.vue";
-    import Check from "./icons/check.vue";
-
-
-
+    import Item from "./Item.vue";
 </script>
 <template>
     <div class="container">
         <div class="panel">
             <label>Results</label>
             <ul>
-                <li>
-                    <span class="item icons">
-                        <Cross />
-                    </span>
-                    <p>Testing Kit</p>
-                </li>
-                <li>
-                    <span class="item icons">
-                        <Check />
-                    </span>
-                    <p>Testing Kit</p>
-                </li>
+                <Item title="hotdog" value="false" />
+                <Item title="hakdog" value="true" />
                 <li>
                     <label>Results</label>
                     <ul>
@@ -78,35 +64,4 @@
         padding: 0;
         margin: .5rem 0rem .5rem 1rem
     }
-
-    .container > .panel ul > li {
-        padding: 0;
-        margin-bottom: .7rem;
-        font-family: "Montserrat","Sans-Serif";
-        font-weight: 300;
-        color: #4a4a42;
-        font-size: 1.1rem;
-    }
-
-    .container > .panel ul > li::before {
-        content: "―\2000\2000";
-    } 
-
-    .container > .panel > ul > li p {
-        display: inline-block;
-        font-style: normal;
-        font-weight: normal;
-        font-variant: normal;
-    }
-    .container > .panel > ul > li p > span {
-        display: inline-block;
-        color: rgb(48, 209, 88);
-    }
-    /* .container > .panel > ul > li p.maybe {
-
-    }
-
-    .container > .panel > ul > li p.probably {
-
-    } */
 </style>
