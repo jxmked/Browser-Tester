@@ -4,7 +4,21 @@
  * Github: https://github.com/jxmked/Browser-Tester/
  */
 
+/**
+ * Legacy support
+ */
 
+Object.entries = Object.entries || ((obj:any):Array<any> => {
+    const ownProps = Object.keys(obj);
+    let index = ownProps.length;
+    const arr = new Array(index);
+
+    while(index--)
+        arr[index] = [ownProps[index], obj[ownProps[index]]];
+    
+    return arr;
+})
+/****** */
 const LIST_ITEM:HTMLElement = document.getElementById("items")!;
 const TEXT_LABEL:HTMLElement = document.getElementById("test-label-status")!;
 const ACRY:HTMLElement = document.getElementById("lib")!;
@@ -80,12 +94,12 @@ const main:Function = (name:string, items:object, depth:number):DocumentFragment
             ul.appendChild(li);
         
         } else {
-            ul.append(create_item(title, attr));
+            ul.appendChild(create_item(title, attr));
         }
     });
     
-    frag.append(label);
-    frag.append(ul);
+    frag.appendChild(label);
+    frag.appendChild(ul);
 
     return frag;
 }
