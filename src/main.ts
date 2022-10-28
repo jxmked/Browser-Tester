@@ -17,6 +17,11 @@ const BOOLEAN_RESULT:{[key:string]:string} = {
     "false": "icon-cross"
 };
 
+const counts:{[key:string]:number} = {
+    "num": 0,
+    "success": 0
+};
+
 const create_item:Function = (name:string, value:number|string|boolean):HTMLElement => {
     const li:HTMLElement = document.createElement("li");
     const content:HTMLElement = document.createElement("span");
@@ -24,13 +29,13 @@ const create_item:Function = (name:string, value:number|string|boolean):HTMLElem
     content.appendChild(document.createTextNode(name));
     
     li.appendChild(content);
-    
+
     if(typeof value == "boolean") {
         
         content.classList.add("item");
         content.classList.add("icons");
         content.classList.add(BOOLEAN_RESULT[String(value)]);
-    
+        
     } else {
     
         const childSpan:HTMLElement = document.createElement("span");
@@ -41,7 +46,13 @@ const create_item:Function = (name:string, value:number|string|boolean):HTMLElem
         content.appendChild(document.createTextNode(" - "));
         content.appendChild(childSpan);
     }
-    
+
+    if(["true", "probably"].indexOf(String(value).toLowerCase()) != -1){
+        counts["success"]++;
+    }
+
+    counts["num"]++;
+
     return li;
 }
 
@@ -53,7 +64,8 @@ const main:Function = (name:string, items:object, depth:number):DocumentFragment
     if(depth == 1) {
         label.classList.add("header-color");
         label.classList.add("header-label");
-        label.classList.add("header-bold");    
+        label.classList.add("header-bold");
+        label.setAttribute("id", "primary-label");
     }
 
     label.appendChild(document.createTextNode(String(name)));
@@ -93,7 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
             LIST_ITEM.removeChild(LIST_ITEM.firstChild)
         }
 
-        LIST_ITEM.appendChild(main("Tested Items", res, 1));
+        LIST_ITEM.appendChild(main("Features:", res, 1));
+        
+        const lnode = document.createTextNode(` ${counts["success"]}/${counts["num"]}`);
+        document.getElementById("primary-label")?.appendChild(lnode);
     }, 3000);
         
     // @ts-ignore

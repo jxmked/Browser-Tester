@@ -1,4 +1,0 @@
-This resources is from Bootstrap Icon
-
-Source:
-https://github.com/twbs/icons 
