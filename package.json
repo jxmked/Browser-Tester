@@ -6,7 +6,8 @@
   "scripts": {
     "gen-mdnr": "modernizr -c modernizr-config.json -d assets/lib/modernizr-custom.js",
     "build": "tsc -p tsconfig-build.json && sass -s compressed --no-source-map \"./src/styles/main.scss:dist/main.css\"",
-    "dev": "concurrently --raw \"tsc --watch -p tsconfig.json\" \"sass --watch -s compressed --embed-sources \"./src/styles/main.scss:dist/main.css\"\""
+    "dev": "concurrently --raw \"tsc --watch -p tsconfig.json\" \"sass --watch -s compressed --embed-sources \"./src/styles/main.scss:dist/main.css\"\"",
+    "minify": "npx babel ./dist/main.js -o ./dist/main.js --minified"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,8 @@
   },
   "homepage": "https://jxmked.github.io/Browser-Tester/",
   "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.6",
     "@types/modernizr": "^3.5.3",
     "concurrently": "^7.4.0",
     "modernizr": "^3.12.0",
